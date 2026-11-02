@@ -1,0 +1,34 @@
+# ─── CẤU HÌNH CHUNG ───────────────────────────────────────────
+# Một file, mọi phần cùng đọc: fetch_stock.py, 3 skill trong .claude/skills/, send_summary.py.
+# Muốn đổi mã, số top picks hay ngưỡng dừng: chỉ sửa ở đây, không sửa code.
+
+tickers:
+  - VCB
+  - VIC
+  - VHM
+  - HPG
+  - TCB
+  - MBB
+  - VNM
+  - FPT
+  - MSN
+  - BID
+
+fetch:
+  lookback_days: 90        # lần đầu lấy 90 ngày, các lần sau chỉ lấy ngày còn thiếu
+  source: Yahoo Finance    # chỉ để in tên nguồn ở chân email; fetch_stock.py luôn lấy từ Yahoo qua yfinance
+
+report:
+  top_picks: 3             # số mã trong "Top picks hôm nay"
+  window_days: 30          # Return và biến động tính trên 30 ngày gần nhất
+  language: vi             # vi hoặc en
+
+checks:                    # luật dừng: script đọc, AI không tự quyết
+  max_data_age_days: 3     # dữ liệu cũ hơn số ngày này → bỏ qua lần chạy (Skipped)
+  max_missing_tickers: 2   # thiếu nhiều mã hơn → dừng, email "cần xem"
+  max_daily_move_pct: 15   # một mã đổi giá quá mức này trong 1 phiên → dừng, email "cần xem"
+                           # (HOSE giới hạn ±7%/phiên, nên vượt 15% gần như chắc là lỗi nguồn hoặc chia tách)
+
+email:
+  mode: important          # important: chỉ gửi khi có kết quả mới, cần xem, lỗi, im lặng
+                           # every: gửi cả khi lần chạy bị bỏ qua

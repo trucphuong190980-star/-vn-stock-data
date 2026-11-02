@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh auth *)",
+      "Bash(sed 's|^\\\\./||')",
+      "Bash(grep -rnIE \"\\(ghp_|github_pat_|sk-ant-|xox[bp]-|AKIA[0-9A-Z]{16}|BEGIN [A-Z ]*PRIVATE KEY|\\(password|passwd|api_key|apikey|token|secret\\)[\\\\\"' ]*[:=][\\\\\"' ]*[A-Za-z0-9_/+-]{12,}\\)\" .)",
+      "Bash(git ls-remote *)",
+      "Bash(git config *)"
+    ]
+  }
+}

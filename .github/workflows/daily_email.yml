@@ -1,0 +1,33 @@
+name: VN Stock Daily Email
+# Bước "email" trong workflow.yaml.
+
+on:
+  schedule:
+    # Chạy lúc 13:00 UTC = 20:00 giờ Việt Nam, thứ 2 đến thứ 6
+    # Sau khi fetch (18:00) và Routine chạy /run (19:00). Email đọc runs/{hôm nay}/run.json để chọn loại thư.
+    - cron: '0 13 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      # send_summary.py in report HTML ra PDF bằng google-chrome có sẵn trên ubuntu-latest, rồi đính kèm PDF.
+      - name: Gửi email tóm tắt
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python send_summary.py

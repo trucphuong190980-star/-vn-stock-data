@@ -1,0 +1,60 @@
+# workflow.yaml — bản đồ của AI system. Mỗi bước: ai làm, chạy ở đâu, đọc gì, ghi gì, khi nào dừng.
+# Claude Routine chỉ làm các bước có "runs_on: Claude Routine", qua lệnh /run (.claude/commands/run.md).
+
+name: vn-stock-daily-brief
+timezone: Asia/Ho_Chi_Minh        # giờ ghi trong file này là giờ Việt Nam; cron trong .github/workflows tính theo UTC
+
+steps:
+  - id: fetch
+    who: SCRIPT
+    runs_on: GitHub Actions · .github/workflows/daily_fetch.yml · 18:00 thứ 2–6 (cron '0 11 * * 1-5')
+    command: python fetch_stock.py
+    reads: [config.yaml, data/stock_data.csv]
+    writes: [data/stock_data.csv, logs/fetch.log]
+
+  - id: check
+    who: SCRIPT
+    runs_on: Claude Routine · 19:00 thứ 2–6 · /run
+    skill: stock-check
+    command: python .claude/skills/stock-check/scripts/check_and_measure.py
+    reads: [config.yaml, data/stock_data.csv, logs/last_analyzed.txt]
+    writes: [runs/<ngày>/run.json, runs/<ngày>/metrics.json]
+    stop:
+      skipped: dữ liệu cũ hơn checks.max_data_age_days · đã phân tích ngày dữ liệu này
+      needs_review: thiếu nhiều hơn checks.max_missing_tickers mã · một mã đổi giá quá checks.max_daily_move_pct
+      failed: không có data/stock_data.csv
+    notes_only: thiếu 1–2 mã · khối lượng phiên cuối bằng 0
+
+  - id: analyze
+    who: AI
+    runs_on: Claude Routine · /run
+    skill: stock-picks
+    reads: [runs/<ngày>/metrics.json, .claude/skills/stock-picks/SKILL.md]
+    writes: [runs/<ngày>/picks.json]
+    rule: chỉ viết lý do cho các mã top; mọi con số lấy từ metrics.json, không gõ số mới
+
+  - id: report
+    who: SCRIPT
+    runs_on: Claude Routine · /run
+    skill: stock-report
+    command: python .claude/skills/stock-report/scripts/build_report.py
+    reads: [runs/<ngày>/metrics.json, runs/<ngày>/picks.json]
+    writes: [reports/stock_report_<ngày>.html, runs/<ngày>/run.json, logs/last_analyzed.txt]
+
+  - id: publish
+    who: SCRIPT
+    runs_on: Claude Routine · /run
+    command: git add runs reports logs && git commit && git push origin HEAD:main
+    writes: [repo]
+
+  - id: email
+    who: SCRIPT
+    runs_on: GitHub Actions · .github/workflows/daily_email.yml · 20:00 thứ 2–6 (cron '0 13 * * 1-5')
+    command: python send_summary.py
+    reads: [config.yaml, runs/<ngày>/run.json, runs/<ngày>/picks.json, reports/stock_report_<ngày>.html]
+    writes: [email]
+    kinds:
+      result: run.json = succeeded → bảng tóm tắt, top picks, đính kèm report PDF (in từ report HTML lúc gửi)
+      review: run.json = needs_review → lý do dừng, việc cần làm
+      error: run.json = failed hoặc còn running → bước hỏng
+      silence: chưa có run.json của hôm nay → Routine chưa chạy hoặc chưa push

@@ -1,0 +1,40 @@
+name: VN Stock Daily Fetch
+# Bước "fetch" trong workflow.yaml. Lịch GitHub tính theo UTC: 11:00 UTC = 18:00 giờ Việt Nam.
+
+on:
+  schedule:
+    # Chạy lúc 11:00 UTC = 18:00 giờ Việt Nam, thứ 2 đến thứ 6
+    - cron: '0 11 * * 1-5'
+  workflow_dispatch:
+    # Cho phép chạy thủ công từ tab Actions trên GitHub
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # Cần để commit file CSV vào repo
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch stock data
+        run: python fetch_stock.py
+
+      - name: Commit và push CSV
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/stock_data.csv logs/fetch.log
+          git diff --staged --quiet || git commit -m "data: daily fetch $(date +'%Y-%m-%d')"
+          git push
+
