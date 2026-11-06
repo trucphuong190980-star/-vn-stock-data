@@ -1,0 +1,8 @@
+{
+  "summary": "Trong 30 ngày qua nhóm 10 mã nghiêng về giảm: chỉ một mã tăng, bốn mã giảm, Return bình quân âm.",
+  "picks": [
+    {"ticker": "HPG", "reason": "Đứng đầu theo Return so với biến động trong 30 ngày qua, là mã duy nhất có xu hướng tăng trong nhóm. Khối lượng gần đây cao hơn bình thường, củng cố tín hiệu này."},
+    {"ticker": "TCB", "reason": "Return dương với biến động thấp hơn mặt bằng nên xếp thứ hai. Xu hướng đi ngang và khối lượng gần đây thấp hơn bình thường, tín hiệu chưa mạnh."},
+    {"ticker": "MBB", "reason": "Return dương, biến động thấp nên giữ vị trí thứ ba, sát TCB. Xu hướng đi ngang, khối lượng gần đây cao hơn bình thường một chút."}
+  ]
+}
