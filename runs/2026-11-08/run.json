@@ -1,0 +1,29 @@
+{
+  "run_id": "2026-11-08",
+  "workflow": "vn-stock-daily-brief",
+  "status": "skipped",
+  "data_date": "2026-11-05",
+  "started_at": "2026-11-08T19:14:30+07:00",
+  "updated_at": "2026-11-08T19:14:30+07:00",
+  "accepted": false,
+  "steps": [
+    {
+      "step": "check",
+      "who": "SCRIPT",
+      "status": "stop",
+      "note": "Ngày dữ liệu 2026-11-05 đã phân tích rồi (ngày nghỉ hoặc chưa có phiên mới)."
+    },
+    {
+      "step": "analyze",
+      "who": "AI",
+      "status": "not_run"
+    },
+    {
+      "step": "report",
+      "who": "SCRIPT",
+      "status": "not_run"
+    }
+  ],
+  "flags": [],
+  "outputs": []
+}
