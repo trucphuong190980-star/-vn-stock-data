@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-11-09",
+  "workflow": "vn-stock-daily-brief",
+  "status": "succeeded",
+  "data_date": "2026-11-06",
+  "started_at": "2026-11-09T19:21:47+07:00",
+  "updated_at": "2026-11-09T19:21:55+07:00",
+  "accepted": false,
+  "steps": [
+    {
+      "step": "check",
+      "who": "SCRIPT",
+      "status": "ok",
+      "note": "10/10 mã đủ dữ liệu, phiên 2026-11-06"
+    },
+    {
+      "step": "analyze",
+      "who": "AI",
+      "status": "ok",
+      "note": "lý do cho HPG, VIC, MBB"
+    },
+    {
+      "step": "report",
+      "who": "SCRIPT",
+      "status": "ok",
+      "note": "reports/stock_report_2026-11-09.html"
+    }
+  ],
+  "flags": [],
+  "outputs": [
+    "reports/stock_report_2026-11-09.html"
+  ]
+}
