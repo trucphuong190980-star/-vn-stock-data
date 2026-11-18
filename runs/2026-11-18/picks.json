@@ -1,0 +1,8 @@
+{
+  "summary": "Trong 30 ngày qua nhóm 10 mã nghiêng về giảm: chỉ một mã tăng, sáu mã giảm, ba mã đi ngang và Return bình quân âm.",
+  "picks": [
+    {"ticker": "VIC", "reason": "Mã duy nhất có xu hướng tăng và Return cao nhất nhóm, vượt xa các mã còn lại. Biến động thuộc nhóm cao nhưng Return đủ lớn để bù. Khối lượng gần đây thấp hơn bình thường, nên cần xem dòng tiền có theo kịp hay không."},
+    {"ticker": "HPG", "reason": "Return dương nhẹ trong khi phần lớn nhóm giảm, kèm biến động thuộc nhóm thấp nên tỷ lệ Return so với biến động đứng thứ hai. Xu hướng đi ngang và khối lượng gần đây thấp hơn bình thường cho thấy tín hiệu chưa mạnh."},
+    {"ticker": "VHM", "reason": "Return dương, nhỉnh hơn HPG nhưng biến động cao hơn nên xếp thứ ba theo Return so với biến động. Xu hướng đi ngang và khối lượng gần đây thấp hơn bình thường khá rõ, cho thấy lực giao dịch đang yếu."}
+  ]
+}
