@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-11-25",
+  "workflow": "vn-stock-daily-brief",
+  "status": "succeeded",
+  "data_date": "2026-11-23",
+  "started_at": "2026-11-25T19:14:44+07:00",
+  "updated_at": "2026-11-25T19:15:01+07:00",
+  "accepted": false,
+  "steps": [
+    {
+      "step": "check",
+      "who": "SCRIPT",
+      "status": "ok",
+      "note": "10/10 mã đủ dữ liệu, phiên 2026-11-23"
+    },
+    {
+      "step": "analyze",
+      "who": "AI",
+      "status": "ok",
+      "note": "lý do cho VIC, HPG, VHM"
+    },
+    {
+      "step": "report",
+      "who": "SCRIPT",
+      "status": "ok",
+      "note": "reports/stock_report_2026-11-25.html"
+    }
+  ],
+  "flags": [],
+  "outputs": [
+    "reports/stock_report_2026-11-25.html"
+  ]
+}

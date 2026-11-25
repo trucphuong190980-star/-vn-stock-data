@@ -1,0 +1,17 @@
+{
+  "summary": "Nhóm 10 mã nghiêng hẳn về sắc đỏ trong 30 ngày qua, chỉ một mã tăng còn lại đa số giảm và đi ngang.",
+  "picks": [
+    {
+      "ticker": "VIC",
+      "reason": "Mã duy nhất có Return dương trong nhóm, xu hướng tăng rõ và biến động thuộc nhóm thấp. Khối lượng gần đây thấp hơn bình thường, cho thấy đà tăng không đến từ dòng tiền đột biến mà khá bền."
+    },
+    {
+      "ticker": "HPG",
+      "reason": "Return âm nhẹ nhưng ít nhất trong nhóm sau VIC, xu hướng đi ngang và biến động thấp hơn mặt bằng chung. Khối lượng dưới mức bình thường, phản ánh trạng thái tích lũy hơn là bị bán mạnh."
+    },
+    {
+      "ticker": "VHM",
+      "reason": "Return âm, xu hướng giảm nhưng biến động vẫn ở mức thấp trong nhóm. Khối lượng thấp hơn bình thường, cho thấy mức giảm diễn ra từ từ chứ không có áp lực bán dồn dập."
+    }
+  ]
+}
